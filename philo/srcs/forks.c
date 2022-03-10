@@ -6,12 +6,10 @@
 /*   By: dhawkgir <dhawkgir@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:11:09 by dhawkgir          #+#    #+#             */
-/*   Updated: 2022/03/07 20:16:16 by dhawkgir         ###   ########.fr       */
+/*   Updated: 2022/03/09 14:30:15 by dhawkgir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pthread.h>
-#include <stdlib.h>
 #include "philo.h"
 
 pthread_mutex_t	**get_forks(void)

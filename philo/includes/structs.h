@@ -6,7 +6,7 @@
 /*   By: dhawkgir <dhawkgir@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:10:57 by dhawkgir          #+#    #+#             */
-/*   Updated: 2022/03/08 14:17:08 by dhawkgir         ###   ########.fr       */
+/*   Updated: 2022/03/09 16:40:15 by dhawkgir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,22 @@
 
 # include <pthread.h>
 
-enum	e_state
+enum	e_status
 {
-	thinking,
-	grabbing_forks,
-	eating,
-	sleeping,
-	deceased
+	THINK,
+	GRAB,
+	EAT,
+	SLEEP,
+	DEAD
+};
+
+enum	e_print
+{
+	THREAD,
+	HEAD,
+	FOOT,
+	NO_MEALS,
+	NO_PHILOS
 };
 
 typedef struct s_philo
@@ -41,7 +50,7 @@ typedef struct s_setup
 	unsigned long	time_to_eat;
 	unsigned long	time_to_sleep;
 	unsigned long	max_meals;
-	unsigned long	satisfied;
+	unsigned long	overflow;
 	int				death;
 	pthread_mutex_t	*std_out;
 }	t_setup;

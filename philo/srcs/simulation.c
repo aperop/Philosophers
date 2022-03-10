@@ -6,13 +6,10 @@
 /*   By: dhawkgir <dhawkgir@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:11:20 by dhawkgir          #+#    #+#             */
-/*   Updated: 2022/03/08 14:31:13 by dhawkgir         ###   ########.fr       */
+/*   Updated: 2022/03/10 14:30:42 by dhawkgir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <pthread.h>
-#include "structures.h"
 #include "philo.h"
 
 static void	start_routine(t_philo *philo)
@@ -24,7 +21,7 @@ static void	start_routine(t_philo *philo)
 	pthread_create(&tid, NULL, &death_timer, philo);
 	pthread_detach(tid);
 	while (!setup->death && (!setup->max_meals
-			|| setup->satisfied < setup->num_philos))
+			|| setup->overflow < setup->num_philos))
 	{
 		grab_forks(philo);
 		eat(philo);
@@ -96,8 +93,8 @@ void	start_simulation(void)
 	philos = malloc(setup->num_philos * sizeof(t_philo));
 	if (philos == NULL)
 		return ;
-	// print_message(HEAD);
+	print_message(HEAD);
 	simulate(philos);
 	free(philos);
-	// print_message(FOOT);
+	print_message(FOOT);
 }

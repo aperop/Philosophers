@@ -6,7 +6,7 @@
 /*   By: dhawkgir <dhawkgir@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:11:28 by dhawkgir          #+#    #+#             */
-/*   Updated: 2022/03/08 14:12:15 by dhawkgir         ###   ########.fr       */
+/*   Updated: 2022/03/09 17:10:17 by dhawkgir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static unsigned long	time_elapsed(struct timeval *then)
 		+ now.tv_usec - then->tv_usec);
 }
 
-void	better_usleep(unsigned long sleep_time)
+void	ft_usleep(unsigned long sleep_time)
 {
 	struct timeval	start;
 	t_setup			*setup;
@@ -42,5 +42,5 @@ void	better_usleep(unsigned long sleep_time)
 	gettimeofday(&start, NULL);
 	setup = get_setup();
 	while (!setup->death && time_elapsed(&start) < sleep_time)
-		usleep(50);
+		usleep(100);
 }

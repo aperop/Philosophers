@@ -6,13 +6,10 @@
 /*   By: dhawkgir <dhawkgir@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:11:22 by dhawkgir          #+#    #+#             */
-/*   Updated: 2022/03/07 20:00:15 by dhawkgir         ###   ########.fr       */
+/*   Updated: 2022/03/09 16:40:28 by dhawkgir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pthread.h>
-#include <stdlib.h>
-#include "structures.h"
 #include "philo.h"
 
 t_setup	*get_setup(void)
@@ -28,7 +25,7 @@ void	parse_args(int argc, char **argv)
 
 	setup = get_setup();
 	setup->death = 0;
-	setup->satisfied = 0;
+	setup->overflow = 0;
 	setup->num_philos = ft_atoi(argv[1]);
 	if (setup->num_philos == 0)
 		print_message(NO_PHILOS);
