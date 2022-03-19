@@ -6,7 +6,7 @@
 /*   By: dhawkgir <dhawkgir@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:11:12 by dhawkgir          #+#    #+#             */
-/*   Updated: 2022/03/07 17:53:12 by dhawkgir         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:08:22 by dhawkgir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ time_to_sleep [number_of_times_each_philosopher_must_eat]\n\n\e[0m");
 	printf("\e[0;35mnumber_of_philosophers\n\t\e[0m");
 	printf("Number of philosophers and forks\n");
 	printf("\e[0;35mtime_to_die (in milliseconds)\n\t\e[0m");
-	printf("if a philosopher doesn't start eating 'time_to_eat' milliseconds \
+	printf("if a philosopher doesn't start EAT 'time_to_eat' milliseconds \
 after starting his last meal or the beginning of the stimulation, it dies\n");
 	printf("\e[0;35mtime_to_eat (in milliseconds)\n\t\e[0m");
 	printf("the time it takes for a philosopher to philo_eat. \
 During that time he will need to keep the two forks\n");
 	printf("\e[0;35mtime_to_sleep (in milliseconds)\n\t\e[0m");
-	printf("the time the philosopher will spend sleeping\n");
+	printf("the time the philosopher will spend SLEEP\n");
 	printf("\e[0;35mnumber_of_times_each_philosopher_must_eat \
 (optional)\n\t\e[0m");
 	printf("If all philosophers philo_eat at least this amount of times, \

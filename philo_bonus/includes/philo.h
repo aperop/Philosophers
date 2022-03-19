@@ -6,7 +6,7 @@
 /*   By: dhawkgir <dhawkgir@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 16:01:44 by dhawkgir          #+#    #+#             */
-/*   Updated: 2022/03/10 16:15:48 by dhawkgir         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:02:11 by dhawkgir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <unistd.h>
 # include <semaphore.h>
 
-# define HEAD_MSG		"|    ms    |  id  |                   |\n"
+# define HEAD_MSG		"|    ms    |  id  |       state       |\n"
 # define FOOT_MSG		"|-------------------------------------|\n"
-# define THREAD_MSG		"| Failed to create all processes.       |\n"
+# define PROCESS_MSG	"| Failed to create all processes.     |\n"
 
 /* Death */
 void			*death_timer(void *ptr);

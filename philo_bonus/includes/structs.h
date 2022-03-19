@@ -6,7 +6,7 @@
 /*   By: dhawkgir <dhawkgir@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 16:00:21 by dhawkgir          #+#    #+#             */
-/*   Updated: 2022/03/10 16:00:22 by dhawkgir         ###   ########.fr       */
+/*   Updated: 2022/03/17 16:52:15 by dhawkgir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ enum	e_status
 
 enum	e_print
 {
-	THREAD,
+	PROCESS,
 	HEAD,
 	FOOT,
 	NO_MEALS,

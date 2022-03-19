@@ -6,7 +6,7 @@
 /*   By: dhawkgir <dhawkgir@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 12:11:16 by dhawkgir          #+#    #+#             */
-/*   Updated: 2022/03/10 14:30:15 by dhawkgir         ###   ########.fr       */
+/*   Updated: 2022/03/17 17:08:22 by dhawkgir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	write_std_out(int state, unsigned long id, unsigned long timestamp)
 {
 	t_setup				*setup;
 	static const char	*str[] = {
-		"%ld %ld is thinking\n",
+		"%ld %ld is THINK\n",
 		"%ld %ld has taken a fork\n",
-		"%ld %ld is eating\n",
-		"%ld %ld is sleeping\n",
+		"%ld %ld is EAT\n",
+		"%ld %ld is SLEEP\n",
 		"%ld %ld died\n"
 	};
 
@@ -30,10 +30,10 @@ void	write_std_out(int state, unsigned long id, unsigned long timestamp)
 	printf(str[state], timestamp, id);
 }
 /*
-		"| %8ld    %3ld   is thinking.      |\n",
+		"| %8ld    %3ld   is THINK.      |\n",
 		"| %8ld    %3ld   has taken a fork. |\n",
-		"| %8ld    %3ld   is eating.        |\n",
-		"| %8ld    %3ld   is sleeping.      |\n",
+		"| %8ld    %3ld   is EAT.        |\n",
+		"| %8ld    %3ld   is SLEEP.      |\n",
 		"| %8ld    %3ld   died.             |\n"
 */
 
@@ -57,7 +57,7 @@ void	print_message(int option)
 	}
 	else if (option == FOOT)
 		printf(FOOT_MSG);
-	else if (option == THREAD)
-		printf(THREAD_MSG);
+	else if (option == PROCESS)
+		printf(PROCESS_MSG);
 	return ;
 }

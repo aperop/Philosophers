@@ -1,11 +1,18 @@
-#include "philo.h"
+#include <semaphore.h>
+#include <signal.h>
+#include <stdlib.h>
+#include <sys/wait.h>
+#include <pthread.h>
+#include <unistd.h>
+#include "structs.h"
+#include "proto.h"
 
 static void	start_routine(t_philo *philo)
 {
-	t_setup		*setup;
+	t_specs		*specs;
 	pthread_t	tid;
 
-	setup = get_setup();
+	specs = get_specs();
 	pthread_create(&tid, NULL, &death_timer, philo);
 	pthread_detach(tid);
 	while (1)
@@ -20,13 +27,13 @@ static void	start_routine(t_philo *philo)
 
 static void	init_philo(t_philo *philo)
 {
-	t_setup	*setup;
+	t_specs	*specs;
 
-	setup = get_setup();
-	sem_wait(setup->satisfied);
+	specs = get_specs();
+	sem_wait(specs->overflow);
 	philo->meals = 0;
 	philo->last_fed = 0;
-	philo->state = thinking;
+	philo->state = THINK;
 }
 
 static void	*spawn_philo(t_philo *philo)
@@ -39,19 +46,19 @@ static void	*spawn_philo(t_philo *philo)
 static void	simulate(t_philo **philos)
 {
 	unsigned long	i;
-	t_setup			*setup;
-	t_setup			*setup_p;
+	t_specs			*specs;
+	t_specs			*specs_p;
 
-	setup = get_setup();
+	specs = get_specs();
 	i = 0;
-	while (i < setup->num_philos)
+	while (i < specs->num_philos)
 	{
 		(*philos)[i].index = i;
 		(*philos)[i].pid = fork();
 		if ((*philos)[i].pid == 0)
 		{
-			setup_p = get_setup();
-			*setup_p = *setup;
+			specs_p = get_specs();
+			*specs_p = *specs;
 			set_base_timestamp();
 			spawn_philo(&(*philos)[i]);
 		}
@@ -63,13 +70,13 @@ static void	simulate(t_philo **philos)
 	end_simulation(philos, i);
 }
 
-void	launch_simulation(void)
+void		start_simulation(void)
 {
-	t_setup			*setup;
+	t_specs			*specs;
 	t_philo			*philos;
 
-	setup = get_setup();
-	philos = malloc(setup->num_philos * sizeof(t_philo));
+	specs = get_specs();
+	philos = malloc(specs->num_philos * sizeof(t_philo));
 	if (philos == NULL)
 		return ;
 	print_message(HEADER);
