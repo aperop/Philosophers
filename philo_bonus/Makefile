@@ -20,7 +20,7 @@ SRCS	=	$(SRCDIR)/dead.c \
 			$(SRCDIR)/routine.c \
 			$(SRCDIR)/simulation.c \
 			$(SRCDIR)/simulation2.c \
-			$(SRCDIR)/specs.c \
+			$(SRCDIR)/parse.c \
 			$(SRCDIR)/timestamp.c \
 			$(SRCDIR)/utils.c
 
@@ -28,8 +28,7 @@ OBJS	=	$(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 CC		=	cc
 INCS	=	-Iincludes/
 FLAGS	=	-O3 -Wall -Wextra -Werror
-MSG		=	"Use ./$(NAME) number_of_philosophers time_to_die time_to_eat \
-			time_to_sleep [number_of_times_each_philosopher_must_eat]"
+
 BUILD_MSG	=	"Building objects... %-33.33s\r"
 COMPILE_MSG	=	"All objects have been built. Compiling...\r"
 DONE_MSG	=	"All objects have been built. Compiling done."
@@ -39,11 +38,9 @@ FCLEAN_MSG	=	"Executable has been deleted."
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			@printf $(COMPILE_MSG)
-			@$(CC) $(OBJS) $(FLAGS) -o $(NAME) -lpthread
-			@echo $(DONE_MSG)
-			@echo "\n"
-			@echo $(MSG)
+				@printf $(COMPILE_MSG)
+				@$(CC) $(OBJS) $(FLAGS) -o $(NAME) -lpthread
+				@echo $(DONE_MSG)
 
 $(OBJDIR)/%.o:	$(SRCDIR)/%.c
 				@mkdir -p $(OBJDIR)
@@ -51,13 +48,16 @@ $(OBJDIR)/%.o:	$(SRCDIR)/%.c
 				@$(CC) $(FLAGS) -c -o $@ $< $(INCS)
 
 clean:
-			@rm -rf $(OBJDIR)
-			@echo $(CLEAN_MSG)
+				@rm -rf $(OBJDIR)
+				@echo $(CLEAN_MSG)
 
-fclean:		clean
-			@rm -rf $(NAME)
-			@echo $(FCLEAN_MSG)
+fclean:			clean
+				@rm -rf $(NAME)
+				@echo $(FCLEAN_MSG)
 
-re:			fclean all
+re:				fclean all
 
-.PHONY:		all clean fclean re .c.o
+norm:
+				norminette
+
+.PHONY:			all clean fclean re norm

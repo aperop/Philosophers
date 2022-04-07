@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simulation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dhawkgir <dhawkgir@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/08 00:03:27 by dhawkgir          #+#    #+#             */
+/*   Updated: 2022/04/08 00:03:47 by dhawkgir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <semaphore.h>
 #include <signal.h>
 #include <stdlib.h>
@@ -5,14 +17,14 @@
 #include <pthread.h>
 #include <unistd.h>
 #include "structs.h"
-#include "proto.h"
+#include "philo.h"
 
 static void	start_routine(t_philo *philo)
 {
-	t_specs		*specs;
+	t_setup		*setup;
 	pthread_t	tid;
 
-	specs = get_specs();
+	setup = get_setup();
 	pthread_create(&tid, NULL, &death_timer, philo);
 	pthread_detach(tid);
 	while (1)
@@ -27,13 +39,12 @@ static void	start_routine(t_philo *philo)
 
 static void	init_philo(t_philo *philo)
 {
-	t_specs	*specs;
+	t_setup	*setup;
 
-	specs = get_specs();
-	sem_wait(specs->overflow);
+	setup = get_setup();
+	sem_wait(setup->overflow);
 	philo->meals = 0;
 	philo->last_fed = 0;
-	philo->state = THINK;
 }
 
 static void	*spawn_philo(t_philo *philo)
@@ -46,41 +57,41 @@ static void	*spawn_philo(t_philo *philo)
 static void	simulate(t_philo **philos)
 {
 	unsigned long	i;
-	t_specs			*specs;
-	t_specs			*specs_p;
+	t_setup			*setup;
+	t_setup			*setup_p;
 
-	specs = get_specs();
+	setup = get_setup();
 	i = 0;
-	while (i < specs->num_philos)
+	while (i < setup->num_philos)
 	{
 		(*philos)[i].index = i;
 		(*philos)[i].pid = fork();
 		if ((*philos)[i].pid == 0)
 		{
-			specs_p = get_specs();
-			*specs_p = *specs;
+			setup_p = get_setup();
+			*setup_p = *setup;
 			set_base_timestamp();
 			spawn_philo(&(*philos)[i]);
 		}
 		else if ((*philos)[i].pid == -1)
 			break ;
-		better_usleep(10);
+		ft_usleep(10);
 		i++;
 	}
 	end_simulation(philos, i);
 }
 
-void		start_simulation(void)
+void	start_simulation(void)
 {
-	t_specs			*specs;
+	t_setup			*setup;
 	t_philo			*philos;
 
-	specs = get_specs();
-	philos = malloc(specs->num_philos * sizeof(t_philo));
+	setup = get_setup();
+	philos = malloc(setup->num_philos * sizeof(t_philo));
 	if (philos == NULL)
 		return ;
-	print_message(HEADER);
+	print_message(HEAD);
 	simulate(&philos);
 	free(philos);
-	print_message(FOOTER);
+	print_message(FOOT);
 }

@@ -23,13 +23,13 @@ void	*death_timer(void *ptr)
 	while (!setup->death)
 	{
 		sem_post(setup->std_out);
-		better_usleep((setup->time_to_die
+		ft_usleep((setup->time_to_die
 				- (get_timestamp_in_ms() - philo->last_fed)) * 1000);
 		sem_wait(setup->std_out);
 		if (get_timestamp_in_ms() - philo->last_fed >= setup->time_to_die)
 		{
 			setup->death = 1;
-			write_prompt(DEAD, philo->index + 1, get_timestamp_in_ms());
+			write_std_out(DEAD, philo->index + 1, get_timestamp_in_ms());
 			break ;
 		}
 	}

@@ -16,24 +16,21 @@ void	write_std_out(int state, unsigned long id, unsigned long timestamp)
 {
 	t_setup				*setup;
 	static const char	*str[] = {
-		"%ld %ld is THINK\n",
-		"%ld %ld has taken a fork\n",
-		"%ld %ld is EAT\n",
-		"%ld %ld is SLEEP\n",
-		"%ld %ld died\n"
+		"| %8ld    %3ld   is thinking.      |\n",
+		"| %8ld    %3ld   has taken a fork. |\n",
+		"| %8ld    %3ld   is eating.        |\n",
+		"| %8ld    %3ld   is sleeping.      |\n",
+		"| %8ld    %3ld   died.             |\n"
 	};
 
 	setup = get_setup();
-	if (setup->death || (setup->max_meals
-			&& setup->overflow >= setup->num_philos))
-		return ;
 	printf(str[state], timestamp, id);
 }
 /*
-		"| %8ld    %3ld   is THINK.      |\n",
+		"| %8ld    %3ld   is thinking.      |\n",
 		"| %8ld    %3ld   has taken a fork. |\n",
-		"| %8ld    %3ld   is EAT.        |\n",
-		"| %8ld    %3ld   is SLEEP.      |\n",
+		"| %8ld    %3ld   is eating.        |\n",
+		"| %8ld    %3ld   is sleeping.      |\n",
 		"| %8ld    %3ld   died.             |\n"
 */
 

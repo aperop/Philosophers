@@ -10,18 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROTO_H
-# define PROTO_H
+#ifndef PHILO_H
+# define PHILO_H
 
 # include <stdlib.h>
 # include <stdio.h>
+# include <signal.h>
 # include "structs.h"
 # include <sys/time.h>
 # include <unistd.h>
 # include <semaphore.h>
 
 # define HEAD_MSG		"|    ms    |  id  |       state       |\n"
-# define FOOT_MSG		"|-------------------------------------|\n"
+# define FOOT_MSG		"|_____________________________________|\n"
 # define PROCESS_MSG	"| Failed to create all processes.     |\n"
 
 /* Death */
@@ -30,8 +31,8 @@ void			*death_timer(void *ptr);
 /* Input */
 void			check_args(int argc, char **argv);
 
-/* Prompt */
-void			write_prompt(t_setup state, unsigned long i,
+/* std_out */
+void			write_std_out(int state, unsigned long i,
 					unsigned long timestamp);
 void			print_message(int option);
 
@@ -42,7 +43,7 @@ void			think(t_philo *philo);
 void			grab_forks(t_philo *philo);
 
 /* Simulation */
-void			launch_simulation(void);
+void			start_simulation(void);
 void			end_simulation(t_philo **philos, unsigned long i);
 
 /* setup */
@@ -55,11 +56,7 @@ unsigned long	get_timestamp_in_ms(void);
 void			set_base_timestamp(void);
 
 /* Utils */
-void			better_usleep(unsigned long sleep_time);
+void			ft_usleep(unsigned long sleep_time);
 unsigned long	ft_atoi(char *str);
-void			*ft_memcpy(void *dst, const void *src, size_t n);
-char			*ft_strdup(const char *s, size_t size);
-void			nbr_to_string(char *str, unsigned long pos,
-					unsigned long nbr, char src);
 
 #endif
